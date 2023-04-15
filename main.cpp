@@ -13,6 +13,7 @@ void os();
 void test(){
 
 }
+void SmartKira();
 
 
 int main() {
@@ -35,7 +36,9 @@ int main() {
 
     switch (choice) {
         case 'A':
-            // [Insert SMARTKIRA HERE]
+            cout << endl;
+            SmartKira();
+            cout <<"\n"<< endl;
             break;
         case 'B':
             // [Insert SMARTKIRA HERE]
@@ -132,4 +135,65 @@ void header(){
 }
 void line(){
     cout<<"\n##################################################################################################################\n";
+}
+
+void SmartKira()
+{
+    int range = 5, temp;
+    double number[range], total, average, minimum, maximum;
+    //Input
+    cout << "Enter 5 number..." << endl;
+    for(int a = 1; a <= range; a++){
+        do{
+        cout << "Number " << a << ": ";
+        cin >> number[a];
+        }
+        while(number[a] < 0);
+    }
+
+    //Total Number
+    for(int b = 1; b <= range; b++){
+        total += number[b];
+    }
+
+    //Average Number
+    average = total / range;
+
+    //Minimum Number
+    minimum = number[range];
+    for(int c = 1; c <= range; c++){
+        if(number[c] < minimum){
+            minimum = number[c];
+        }
+    }
+
+    //Maximum Number
+    maximum = number[range];
+    for(int d = 1; d <= range; d++){
+        if(number[d] > maximum){
+            maximum = number[d];
+        }
+    }
+
+    //Biggest to Smallest number
+    for(int e = 1; e <= range; e++){
+        for(int f = 1; f <= range; f++){
+        if(number[e] < number[f]){
+            temp = number[e];
+            number[e] = number[f];
+            number[f] = temp;
+            }
+        }
+    }
+
+    //Output SmartKira
+    cout << "\nRESULT: " << endl;
+    cout << "Total\t\t: " << total << endl;
+    cout << "Average\t\t: " << average << endl;
+    cout << "Smallest Number\t: " << minimum << endl;\
+    cout << "Biggest Number\t: " << maximum << endl;
+    cout << "Biggest to smallest number swap: " << endl;
+    for(int g = 1; g <= range; g++){
+        cout << number[g] << "\t";
+    }
 }
