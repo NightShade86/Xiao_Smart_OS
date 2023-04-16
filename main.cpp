@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <windows.h>
+#include <ctime>
 
 using namespace std;
 enum Position{ LEFT, CENTRE, RIGHT };
@@ -15,16 +16,196 @@ void line();
 void header();
 void print( Position pos, string s, int linelength );
 void os();
-void test(){
-
-}
 void SmartKira();
+class SMARTANALYSE{
+private:
+    string ICnumber;
+public:
+    int statecode,birthYear,birthMonthnum,birthDay,age;
+    string ic="030807011163",birthday,birthMonth,state,gender;
+    void setICnumber(){cout<<"\nEnter your IC NUMBER :";cin>>ic;ICnumber=ic;};
+    void getICnumber(){ic=ICnumber;cout<<"\n\nIC NUMBER : "<<ic;};
+    void ALstate(){
+        statecode= stoi(ic.substr(6, 2));
+        switch (statecode) {
+            case 0:
+                state = "-";
+                break;
+            case 1:
+            case 21:
+            case 22:
+            case 23:
+            case 24:
+                state = "Johor";
+                break;
+            case 2:
+            case 25:
+            case 26:
+            case 27:
+                state = "Kedah";
+                break;
+            case 3:
+            case 28:
+            case 29:
+                state = "Kelantan";
+                break;
+            case 4:
+            case 30:
+                state = "Malacca";
+                break;
+            case 5:
+            case 59:
+                state = "Negeri Sembilan";
+                break;
+            case 6:
+            case 32:
+            case 33:
+                state = "Pahang";
+                break;
+            case 7:
+            case 36:
+            case 37:
+            case 38:
+            case 39:
+                state = "Perak";
+                break;
+            case 8:
+            case 40:
+                state = "Perlis";
+                break;
+            case 9:
+                state = "Penang";
+                break;
+            case 10:
+            case 47:
+            case 48:
+            case 49:
+                state = "Sabah";
+                break;
+            case 11:
+            case 50:
+            case 51:
+            case 52:
+            case 53:
+                state = "Sarawak";
+                break;
+            case 12:
+            case 41:
+            case 42:
+            case 43:
+            case 44:
+                state = "Selangor";
+                break;
+            case 13:
+            case 45:
+            case 46:
+                state = "Terengganu";
+                break;
+            case 14:
+            case 54:
+            case 55:
+            case 56:
+            case 57:
+                state = "Federal Territory of Kuala Lumpur";
+                break;
+            case 15:
+            case 58:
+                state = "Federal Territory of Labuan";
+                break;
+            case 16:
+                state = "Federal Territory of Putrajaya";
+                break;
+            case 17:
+            case 18:
+            case 19:
+            case 20:
+                state = "-";
+                break;
+            default:
+                state = "Unknown";
+                break;
+        }
+    };
+    void ALgender(){
+        if (ic[11]%2==0) {
+            gender = "Female";
+        }else{
+            gender="Male";
+        }
+    };
+    void ALbirthday(){
+        birthYear = stoi(ic.substr(0, 2));
+        if (birthYear < 30) {
+            birthYear += 2000;
+        }
+        else {
+            birthYear += 1900;
+        }
+        birthMonthnum = stoi(ic.substr(2, 2));
+        switch (birthMonthnum) {
+            case 1:
+                birthMonth = "January";
+                break;
+            case 2:
+                birthMonth = "February";
+                break;
+            case 3:
+                birthMonth = "March";
+                break;
+            case 4:
+                birthMonth = "April";
+                break;
+            case 5:
+                birthMonth = "May";
+                break;
+            case 6:
+                birthMonth = "June";
+                break;
+            case 7:
+                birthMonth = "July";
+                break;
+            case 8:
+                birthMonth = "August";
+                break;
+            case 9:
+                birthMonth = "September";
+                break;
+            case 10:
+                birthMonth = "October";
+                break;
+            case 11:
+                birthMonth = "November";
+                break;
+            case 12:
+                birthMonth = "December";
+                break;
+            default:
+                birthMonth = "Invalid month number";
+                break;
+        }
+
+        // Extract the birth day from the IC number.
+        birthDay = stoi(ic.substr(4, 2));
+        birthday=to_string(birthDay)+" "+ birthMonth+" "+ to_string(birthYear);
+    };
+    void ALage() {
+        struct tm date = {0};
+        date.tm_year = birthYear-1900;
+        date.tm_mon  = birthMonthnum-1;
+        date.tm_mday = birthDay;
+        time_t normal = mktime(&date);
+        time_t current;
+        time(&current);
+        age = ((difftime(current, normal) + 86400L/2) / 86400L)/365;
+    }
+};
 
 
 int main() {
     const int LINELENGTH = 123;
     char choice,RPBP;
     int enUm;
+    SMARTANALYSE RUN;
 
     MAIN_SCREEN:
     line();
@@ -47,7 +228,19 @@ int main() {
             cout <<"\n"<< endl;
             break;
         case 'B':
-            // [Insert SMARTKIRA HERE]
+            RUN.setICnumber();
+            RUN.ALstate();
+            RUN.ALgender();
+            RUN.ALbirthday();
+            RUN.getICnumber();
+            RUN.ALage();
+
+            cout<<"\n\n********** YOUR DATA **********";
+            cout<<"\nState     : "<<RUN.state;
+            cout<<"\nGender    : "<<RUN.gender;
+            cout<<"\nBirthday  : "<<RUN.birthday;
+            cout<<"\nAge       : "<<RUN.age<<" years old";
+            cout<<"\n*******************************";
             break;
         case 'C':
             shape:
@@ -95,7 +288,7 @@ int main() {
             goto Choices;
     }
     choice:
-    cout<<"\nWould you like to perform another operation? [Y/N]\n";
+    cout<<"\nWould you like to perform another operation? [Y/N] :";
     cin>>RPBP;
     switch (RPBP) {
         case 'Y':
@@ -115,6 +308,7 @@ int main() {
             line();
             os();
             line();
+            sleep(1);
             return 0;
         default:
             //PlaySound("Windows Critical Stop.wav", GetModuleHandle(NULL), SND_FILENAME);
@@ -178,7 +372,9 @@ void SmartKira()
     int range = 5, temp,tempp;
     double number[range], total, average, minimum, maximum;
     //Input
-    cout << "Enter 5 number..." << endl;
+    system("CLS");
+    header();
+    cout << "\nEnter 5 number..." << endl;
     for(int a = 1; a <= range; a++){
         do{
         cout << "Number " << a << ": ";
