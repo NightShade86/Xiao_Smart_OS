@@ -5,6 +5,11 @@
 
 using namespace std;
 enum Position{ LEFT, CENTRE, RIGHT };
+enum shapes
+{   Circle = 0,
+    Triangle = 3,
+    Square = 4
+};
 
 void line();
 void header();
@@ -19,6 +24,7 @@ void SmartKira();
 int main() {
     const int LINELENGTH = 123;
     char choice,RPBP;
+    int enUm;
 
     MAIN_SCREEN:
     line();
@@ -44,7 +50,35 @@ int main() {
             // [Insert SMARTKIRA HERE]
             break;
         case 'C':
-            // [Insert SMARTKIRA HERE]
+            shape:
+            system("CLS");
+            header();
+            cout<<"\n[1] Circle\n[2] Triangle\n[3] Square";
+            cout<<"\n\nPlease pick your shape to know the amount of sides it has: ";
+            cin>>enUm;
+            switch (enUm) {
+                case 1:
+                    cout << "\nThe amount of sides a Circle has is: " << Circle;
+                    break;
+                case 2:
+                    cout << "\nThe amount of sides a Triangle has is: " << Triangle;
+                    break;
+                case 3:
+                    cout << "\nThe amount of sides a Square has is: " << Square;
+                    break;
+                default:
+                    cout<<"\n"
+                          " _____ _   _ _   _  ___   _     ___________   _____ _   _ ______ _   _ _____ \n"
+                          "|_   _| \\ | | | | |/ _ \\ | |   |_   _|  _  \\ |_   _| \\ | || ___ \\ | | |_   _|\n"
+                          "  | | |  \\| | | | / /_\\ \\| |     | | | | | |   | | |  \\| || |_/ / | | | | |  \n"
+                          "  | | | . ` | | | |  _  || |     | | | | | |   | | | . ` ||  __/| | | | | |  \n"
+                          " _| |_| |\\  \\ \\_/ / | | || |_____| |_| |/ /   _| |_| |\\  || |   | |_| | | |  \n"
+                          " \\___/\\_| \\_/\\___/\\_| |_/\\_____/\\___/|___/    \\___/\\_| \\_/\\_|    \\___/  \\_/  \n"
+                          "                                                                             \n"
+                          "                                                                             ";
+                    sleep(1);
+                    goto shape;
+            }
             break;
         default:
             //PlaySound("Windows Critical Stop.wav", GetModuleHandle(NULL), SND_FILENAME);
@@ -57,10 +91,11 @@ int main() {
                   " \\___/\\_| \\_/\\___/\\_| |_/\\_____/\\___/|___/    \\___/\\_| \\_/\\_|    \\___/  \\_/  \n"
                   "                                                                             \n"
                   "                                                                             ";
+            sleep(1);
             goto Choices;
     }
     choice:
-    cout<<"Would you like to perform another operation? [Y/N]\n";
+    cout<<"\nWould you like to perform another operation? [Y/N]\n";
     cin>>RPBP;
     switch (RPBP) {
         case 'Y':
@@ -92,6 +127,7 @@ int main() {
                   " \\___/\\_| \\_/\\___/\\_| |_/\\_____/\\___/|___/    \\___/\\_| \\_/\\_|    \\___/  \\_/  \n"
                   "                                                                             \n"
                   "                                                                             ";
+            sleep(1);
             goto choice;
 
     }
