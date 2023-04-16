@@ -37,7 +37,7 @@ int main() {
     system("CLS");
     header();
     cout<<"\n[A] Smart Kira\n[B] Smart Analyse\n[C] Smart Shape";
-    cout<<"\nPlease pick a function you'd like to use : ";
+    cout<<"\nPlease pick a function you'd like to use [A/B/C] : ";
     cin>>choice;
 
     switch (choice) {
@@ -54,7 +54,7 @@ int main() {
             system("CLS");
             header();
             cout<<"\n[1] Circle\n[2] Triangle\n[3] Square";
-            cout<<"\n\nPlease pick your shape to know the amount of sides it has: ";
+            cout<<"\n\nPlease pick your shape to know the amount of sides it has [1/2/3] : ";
             cin>>enUm;
             switch (enUm) {
                 case 1:
@@ -104,13 +104,13 @@ int main() {
             //PlaySound("Windows Shutdown.wav", GetModuleHandle(NULL), SND_FILENAME);
             system("CLS");
             print(CENTRE,">>>SYSTEM WILL SHUT DOWN NOW<<<",LINELENGTH);
-            usleep(1);
+            sleep(1);
             system("CLS");
             print(CENTRE,">>SYSTEM WILL SHUT DOWN NOW<<",LINELENGTH);
-            usleep(1);
+            sleep(1);
             system("CLS");
             print(CENTRE,">SYSTEM WILL SHUT DOWN NOW<",LINELENGTH);
-            usleep(1);
+            sleep(1);
             system("CLS");
             line();
             os();
@@ -175,7 +175,7 @@ void line(){
 
 void SmartKira()
 {
-    int range = 5, temp;
+    int range = 5, temp,tempp;
     double number[range], total, average, minimum, maximum;
     //Input
     cout << "Enter 5 number..." << endl;
@@ -228,8 +228,11 @@ void SmartKira()
     cout << "Average\t\t: " << average << endl;
     cout << "Smallest Number\t: " << minimum << endl;\
     cout << "Biggest Number\t: " << maximum << endl;
-    cout << "Biggest to smallest number swap: " << endl;
-    for(int g = 1; g <= range; g++){
-        cout << number[g] << "\t";
-    }
+
+    cout<<"\n\n********** Swapped Numbers **********\n";
+    tempp=minimum;
+    minimum=maximum;
+    maximum=tempp;
+    cout << "Smallest Number\t: " << minimum << endl;
+    cout << "Biggest Number\t: " << maximum << endl;
 }
